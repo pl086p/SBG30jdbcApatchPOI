@@ -1,0 +1,57 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.3.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'application'
+
+version = '0.0.1-SNAPSHOT'
+
+jar {
+	baseName = 'sample'
+	version =  '0.1.0'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile 'org.apache.poi:poi:3.17'
+	compile 'org.apache.poi:poi-ooxml:3.17'
+	compile('org.springframework.boot:spring-boot-starter-jdbc')
+	runtime 'org.postgresql:postgresql' 
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
+}
+
+
+//mainClassName = "useApachePOI.Application.main"
+/* to execute gradle with arguments:
+  add: apply plugin: 'application'
+  $ gradle run -PmyArgs="['2017','11']"
+*/
+
+run {
+     if (project.hasProperty("myArgs")) {
+     	args Eval.me(myArgs)
+     }
+     main = 'useApachePOI.Application'
+}
+
+
+
+
+
